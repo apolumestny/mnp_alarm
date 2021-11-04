@@ -1,0 +1,42 @@
+{
+  "Russia": {
+    "79216503431": {
+      "mccmnc": "250062",
+      "ownerID": "mTINKOFF"
+    },
+    "79110367995": {
+      "mccmnc": "250001",
+      "ownerID": "mMTS"
+    }
+  },
+  "Latvia": {
+    "37129460406": {
+      "mccmnc": "247005",
+      "ownerID": ""
+    },
+    "37125614084": {
+      "mccmnc": "247001",
+      "ownerID": ""
+    }
+  },
+  "Kazakhstan": {
+    "77761112500": {
+      "mccmnc": "401002",
+      "ownerID": "mKcell"
+    },
+    "77770619287": {
+      "mccmnc": "401001",
+      "ownerID": ""
+    }
+  },
+  "Belarus": {
+    "375293042331": {
+      "mccmnc": "257004",
+      "ownerID": ""
+    },
+    "375333365589": {
+      "mccmnc": "257002",
+      "ownerID": ""
+    }
+  }
+}
