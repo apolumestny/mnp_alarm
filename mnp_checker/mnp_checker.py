@@ -76,12 +76,14 @@ class MnpChecker:
         return False
 
     def get_db_diff(self, mnp_db: Dict[str, Dict], hlr_db: Dict[str, Dict]) -> List[str]:
+        print(mnp_db)
+        print(hlr_db)
         diff = []
         for msisdn in mnp_db:
-            mnp_mccmnc = mnp_db[msisdn].get('mccmnc')
-            mnp_ownerid =  mnp_db[msisdn].get('ownerID')
-            hlr_mccmnc = hlr_db[msisdn].get('mccmnc')
-            hlr_ownerid = hlr_db[msisdn].get('ownerID')
+            mnp_mccmnc = mnp_db[msisdn].get('mccmnc', '')
+            mnp_ownerid =  mnp_db[msisdn].get('ownerID', '')
+            hlr_mccmnc = hlr_db[msisdn].get('mccmnc', '')
+            hlr_ownerid = hlr_db[msisdn].get('ownerID', '')
             if mnp_mccmnc != hlr_mccmnc:
                 diff.append(f'{msisdn} hlr_mccmnc - {hlr_mccmnc} expected {mnp_mccmnc}')
             if mnp_ownerid != hlr_ownerid:
@@ -101,6 +103,7 @@ if __name__ == '__main__':
     for country in mnp_countries:
         msisdns: List = list(mnp_db[country].keys())
         hlr_resp = asyncio.run(mnp.send_hlr_request(msisdns))
+        #print(hlr_resp)
         hlr_db[country] = mnp.parse_hlr_response(hlr_resp)
     check_result: Dict[str, bool] = {}
     for country in mnp_countries:
@@ -110,8 +113,9 @@ if __name__ == '__main__':
         sms_text: str = ''
         countries = [country for country, value in check_result.items() if value is False]
         for country in countries:
+            # print(hlr_db[country], mnp_db[country])
             diff = mnp.get_db_diff(hlr_db[country], mnp_db[country])
             sms_text += '\n'.join(diff)
             sms_text += '\n'
         sms_text = urllib.parse.quote_plus(sms_text)
-        mnp.send_sms_alarm(sms_text)
+        #mnp.send_sms_alarm(sms_text)
