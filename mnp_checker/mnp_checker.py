@@ -76,8 +76,8 @@ class MnpChecker:
         return False
 
     def get_db_diff(self, mnp_db: Dict[str, Dict], hlr_db: Dict[str, Dict]) -> List[str]:
-        print(mnp_db)
-        print(hlr_db)
+        #print(mnp_db)
+        #print(hlr_db)
         diff = []
         for msisdn in mnp_db:
             mnp_mccmnc = mnp_db[msisdn].get('mccmnc', '')
@@ -118,4 +118,4 @@ if __name__ == '__main__':
             sms_text += '\n'.join(diff)
             sms_text += '\n'
         sms_text = urllib.parse.quote_plus(sms_text)
-        #mnp.send_sms_alarm(sms_text)
+        mnp.send_sms_alarm(sms_text)
